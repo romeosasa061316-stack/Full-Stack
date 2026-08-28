@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  PASSENGER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  fullName  String
+  email     String   @unique
+  phone     String
+  password  String
+  role      UserRole @default(PASSENGER)
+  createdAt DateTime @default(now())
+  bookings  Booking[]
+  notifications Notification[]
+}
+
+model Route {
+  id          String @id @default(uuid())
+  origin      String
+  destination String
+  distance    Float
+  duration    Int
+  trips       Trip[]
+}
+
+enum BusStatus {
+  AVAILABLE
+  ON_TRIP
+  MAINTENANCE
+}
+
+model Bus {
+  id                 String    @id @default(uuid())
+  busNumber          String    @unique
+  registrationNumber String    @unique
+  capacity           Int
+  status             BusStatus @default(AVAILABLE)
+  trips              Trip[]
+}
+
+enum TripStatus {
+  SCHEDULED
+  DEPARTED
+  COMPLETED
+  CANCELLED
+}
+
+model Trip {
+  id             String     @id @default(uuid())
+  routeId        String
+  busId          String
+  departureDate  DateTime
+  departureTime  String
+  availableSeats Int
+  fare           Float
+  status         TripStatus @default(SCHEDULED)
+  reminderSent   Boolean    @default(false)
+  route Route @relation(fields: [routeId], references: [id])
+  bus   Bus   @relation(fields: [busId], references: [id])
+  bookings Booking[]
+}
+
+enum BookingStatus {
+  CONFIRMED
+  MISSED
+  CANCELLED
+}
+
+model Booking {
+  id                String        @id @default(uuid())
+  bookingReference  String        @unique
+  seatNumber        Int?
+  userId            String
+  tripId            String
+  status            BookingStatus @default(CONFIRMED)
+  createdAt         DateTime      @default(now())
+  user User @relation(fields: [userId], references: [id])
+  trip Trip @relation(fields: [tripId], references: [id])
+  @@unique([tripId, seatNumber])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  userId    String
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+}
