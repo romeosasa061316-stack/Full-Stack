@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+ï»¿import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import api from "../api/axios";
 
@@ -65,7 +65,7 @@ function SearchPage() {
         </div>
 
         <p className="text-sm text-gray-500 mb-4">
-          {origin} {destination && `-> ${destination}`} · {sortedTrips.length} result{sortedTrips.length !== 1 ? "s" : ""}
+          {origin} {destination && `-> ${destination}`} - {sortedTrips.length} result{sortedTrips.length !== 1 ? "s" : ""}
         </p>
 
         {loading ? (
@@ -82,10 +82,10 @@ function SearchPage() {
                   </div>
                   <div>
                     <div className="font-semibold">
-                      {trip.departureTime} · {trip.route.origin} {"->"} {trip.route.destination}
+                      {trip.departureTime} - {trip.route.origin} {"->"} {trip.route.destination}
                     </div>
                     <div className="text-xs text-gray-500">
-                      {formatDate(trip.departureDate)} · {trip.bus.busNumber} · {trip.availableSeats} seats available
+                      {formatDate(trip.departureDate)} - {trip.bus.busNumber} - {trip.availableSeats} seats available
                     </div>
                   </div>
                 </div>

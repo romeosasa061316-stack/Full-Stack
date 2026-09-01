@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+ï»¿import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 
@@ -71,7 +71,7 @@ function SeatSelectionPage() {
       <div className="max-w-2xl mx-auto px-6 py-6">
         <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
           <div className="font-semibold">
-            {trip.bus.busNumber} · {trip.route.origin} {"->"} {trip.route.destination}
+            {trip.bus.busNumber} - {trip.route.origin} {"->"} {trip.route.destination}
           </div>
           <div className="text-sm text-gray-500">{trip.departureTime}</div>
         </div>
