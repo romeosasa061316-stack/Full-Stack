@@ -37,8 +37,8 @@ export const createBooking = async (req, res) => {
       });
 
       const missedMessage = nextTrip
-        ? `You missed the ${trip.departureTime} ${trip.route.origin} ? ${trip.route.destination} departure. Would you like to book the next available bus at ${nextTrip.departureTime}?`
-        : `You missed the ${trip.departureTime} ${trip.route.origin} ? ${trip.route.destination} departure, and no further trips are scheduled on this route today.`;
+        ? `You missed the ${trip.departureTime} ${trip.route.origin} -> ${trip.route.destination} departure. Would you like to book the next available bus at ${nextTrip.departureTime}?`
+        : `You missed the ${trip.departureTime} ${trip.route.origin} -> ${trip.route.destination} departure, and no further trips are scheduled on this route today.`;
 
       await prisma.notification.create({
         data: {
@@ -93,7 +93,7 @@ export const createBooking = async (req, res) => {
     await prisma.notification.create({
       data: {
         title: "Booking Confirmed",
-        message: `Your booking ${booking.bookingReference} for ${trip.route.origin} ? ${trip.route.destination} at ${trip.departureTime} is confirmed. Seat ${booking.seatNumber}.`,
+        message: `Your booking ${booking.bookingReference} for ${trip.route.origin} -> ${trip.route.destination} at ${trip.departureTime} is confirmed. Seat ${booking.seatNumber}.`,
         userId,
       },
     });
@@ -123,5 +123,23 @@ export const getMyBookings = async (req, res) => {
   } catch (error) {
     console.error("Get my bookings error:", error);
     res.status(500).json({ message: "Something went wrong fetching your bookings." });
+  }
+};
+
+export const getBookedSeats = async (req, res) => {
+  try {
+    const { tripId } = req.params;
+
+    const bookings = await prisma.booking.findMany({
+      where: { tripId, status: "CONFIRMED" },
+      select: { seatNumber: true },
+    });
+
+    const bookedSeatNumbers = bookings.map((b) => b.seatNumber);
+
+    res.status(200).json({ bookedSeats: bookedSeatNumbers });
+  } catch (error) {
+    console.error("Get booked seats error:", error);
+    res.status(500).json({ message: "Something went wrong fetching seat availability." });
   }
 };

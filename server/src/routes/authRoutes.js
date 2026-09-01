@@ -1,5 +1,5 @@
 import express from "express";
-import { register, login } from "../controllers/authController.js";
+import { register, login, createAdmin } from "../controllers/authController.js";
 import { protect } from "../middleware/authMiddleware.js";
 import { adminOnly } from "../middleware/adminMiddleware.js";
 
@@ -15,5 +15,7 @@ router.get("/me", protect, (req, res) => {
 router.get("/admin-test", protect, adminOnly, (req, res) => {
   res.json({ message: "Welcome, admin." });
 });
+
+router.post("/create-admin", protect, adminOnly, createAdmin);
 
 export default router;
