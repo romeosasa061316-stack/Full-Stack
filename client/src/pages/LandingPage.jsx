@@ -3,12 +3,10 @@ import busImg from "../assets/dreamtrip-bus.png";
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <nav className="flex items-center justify-between px-4 md:px-8 py-4 bg-black text-white">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-red-600 rounded flex items-center justify-center font-bold text-lg">
-            D
-          </div>
+          <div className="w-8 h-8 bg-red-600 rounded flex items-center justify-center font-bold text-lg">D</div>
           <div>
             <div className="font-bold text-lg leading-tight">DREAMTRIP</div>
             <div className="text-[10px] text-gray-400 leading-tight">Travel Smart. Arrive Safe.</div>
@@ -18,17 +16,13 @@ function LandingPage() {
         <div className="hidden md:flex items-center gap-8 text-sm">
           <Link to="/" className="hover:text-red-500">Home</Link>
           <Link to="/search" className="hover:text-red-500">Routes</Link>
-          <a href="#about" className="hover:text-red-500">About Us</a>
-          <a href="#contact" className="hover:text-red-500">Contact</a>
+          <Link to="/about" className="hover:text-red-500">About Us</Link>
+          <Link to="/contact" className="hover:text-red-500">Contact</Link>
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <Link to="/login" className="px-3 md:px-4 py-2 bg-red-600 rounded text-xs md:text-sm font-medium hover:bg-red-700">
-            Login
-          </Link>
-          <Link to="/signup" className="px-3 md:px-4 py-2 bg-white text-black rounded text-xs md:text-sm font-medium hover:bg-gray-200">
-            Sign Up
-          </Link>
+          <Link to="/login" className="px-3 md:px-4 py-2 bg-red-600 rounded text-xs md:text-sm font-medium hover:bg-red-700">Login</Link>
+          <Link to="/signup" className="px-3 md:px-4 py-2 bg-white text-black rounded text-xs md:text-sm font-medium hover:bg-gray-200">Sign Up</Link>
         </div>
       </nav>
 
@@ -76,22 +70,21 @@ function LandingPage() {
 
       <div className="h-8 md:h-20"></div>
 
-      <section id="about" className="max-w-4xl mx-auto px-4 md:px-8 py-12 scroll-mt-20">
-        <h2 className="text-2xl font-bold mb-4">About Us</h2>
-        <p className="text-gray-600">
-          DreamTrip is a smart bus booking platform built to make intercity travel simple and reliable.
-          We connect passengers with real-time trip availability, instant booking confirmations, and
-          helpful reminders so you never miss your bus again.
-        </p>
-      </section>
-
-      <section id="contact" className="max-w-4xl mx-auto px-4 md:px-8 py-12 scroll-mt-20 border-t border-gray-100">
-        <h2 className="text-2xl font-bold mb-4">Contact</h2>
-        <div className="text-gray-600 space-y-1">
-          <p>Email: support@dreamtrip.co.zw</p>
-          <p>Phone: +263 77 000 0000</p>
+      <footer className="mt-auto bg-black text-gray-400 px-4 md:px-8 py-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center font-bold text-xs text-white">D</div>
+            <span className="text-white font-semibold text-sm">DREAMTRIP</span>
+          </div>
+          <div className="flex gap-6 text-xs">
+            <Link to="/" className="hover:text-white">Home</Link>
+            <Link to="/search" className="hover:text-white">Routes</Link>
+            <Link to="/about" className="hover:text-white">About Us</Link>
+            <Link to="/contact" className="hover:text-white">Contact</Link>
+          </div>
+          <div className="text-xs">&copy; 2026 DreamTrip. All rights reserved.</div>
         </div>
-      </section>
+      </footer>
     </div>
   );
 }
