@@ -26,7 +26,7 @@ function LandingPage() {
         </div>
       </nav>
 
-      <section className="relative bg-black text-white overflow-hidden pb-8 md:pb-24">
+      <section className="relative bg-black text-white pb-16 md:pb-32">
         <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8 md:pt-16 pb-4 md:pb-8 grid md:grid-cols-2 gap-4 md:gap-8 items-center">
           <div className="text-center md:text-left">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
@@ -68,22 +68,8 @@ function LandingPage() {
         </div>
       </section>
 
-      <div className="h-8 md:h-20"></div>
-
-      <footer className="mt-auto bg-black text-gray-400 px-4 md:px-8 py-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center font-bold text-xs text-white">D</div>
-            <span className="text-white font-semibold text-sm">DREAMTRIP</span>
-          </div>
-          <div className="flex gap-6 text-xs">
-            <Link to="/" className="hover:text-white">Home</Link>
-            <Link to="/search" className="hover:text-white">Routes</Link>
-            <Link to="/about" className="hover:text-white">About Us</Link>
-            <Link to="/contact" className="hover:text-white">Contact</Link>
-          </div>
-          <div className="text-xs">&copy; 2026 DreamTrip. All rights reserved.</div>
-        </div>
+      <footer className="mt-auto bg-black text-gray-400 px-4 md:px-8 py-6 text-center text-xs">
+        &copy; 2026 DreamTrip. All rights reserved.
       </footer>
     </div>
   );
